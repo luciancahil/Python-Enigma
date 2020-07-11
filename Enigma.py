@@ -97,7 +97,35 @@ class RotorOne(Rotor):
         self.turnkey = 18 #turns as it goes from Q to R
         self.forwardWires = "EKMFLGDQVZNTOWYHXUSPAIBRCJ"
         self.backwardWires = "UWYGADFPVZBECKMTHXSLRINQOJ"
-        
+
+class RotorTwo(Rotor):
+    def __init__(self, orientation):
+        super().__init__(orientation)
+        self.turnkey = 18 #turns as it goes from Q to R
+        self.forwardWires = "AJDKSIRUXBLHWTMCQGZNPYFVOE"
+        self.backwardWires = "AJPCZWRLFBDKOTYUQGENHXMIVS"
+
+class RotorThree(Rotor):
+    def __init__(self, orientation):
+        super().__init__(orientation)
+        self.turnkey = 18 #turns as it goes from Q to R
+        self.forwardWires = "BDFHJLCPRTXVZNYEIWGAKMUSQO"
+        self.backwardWires = "TAGBPCSDQEUFVNZHYIXJWLRKOM"
+
+class RotorFour(Rotor):
+    def __init__(self, orientation):
+        super().__init__(orientation)
+        self.turnkey = 18 #turns as it goes from Q to R
+        self.forwardWires = "ESOVPZJAYQUIRHXLNFTGKDCMWB"
+        self.backwardWires = "HZWVARTNLGUPXQCEJMBSKDYOIF"
+
+class RotorFive(Rotor):
+    def __init__(self, orientation):
+        super().__init__(orientation)
+        self.turnkey = 18 #turns as it goes from Q to R
+        self.forwardWires = "VZBRGITYUPSDNHLXAWMJQOFECK"
+        self.backwardWires = "QCYLXWENFTZOSMVJUDKGIARPHB"     
+
 
 #public static void main
 r1 = RotorOne(1)
