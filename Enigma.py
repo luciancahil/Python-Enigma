@@ -48,16 +48,25 @@ class Enigma:
             self.secondCritical = False                                                         #turnkeys, then we must prevent the second rotor from
             self.rotors[0].shift()                                                              #turning twice (by setting secondCritical to false) and turn the first rotor (since we turn before running anyway, this is the same difference)
     
+
+    """
+    Before a string can by encrypted, it first must be cleaned. All undeseriable characters (basically anything other than a pure letter)
+    has to be removed, as Enigma can only handle characters
+
+    Then each character is scrambled one by one. Before each character is scrambled, the rotors shift
+
+    """
     def scramble(self, message):
         cleaned = self.cleanString(message.upper())
         scrambled = ""
         
         for x in cleaned:
-            scrambled += x
+            self.shiftRotors()
+            scrambled += self.scrambleChar(x)
 
         return scrambled
     
-    def cleanString(self, message):
+    def cleanString(self, message):         #removing non alphabetical characters
         cleaned = ""
 
         for x in message:
@@ -102,7 +111,48 @@ class Enigma:
         
         if(self.rotors[1].orientation == self.rotors[1].turnkey - 1):
             self.secondCritical = True
+    
+    """
+    The process for scrambling a character is fairly straightforward.
 
+    First, the character is put through the plugboard, so that if the letter is paried up
+    the character then becomes its partner.
+
+    Then, we run through each rotor going forward, starting with the third rotor, then the second, then the first.
+
+    Then the letter is sent through the reflector
+
+    We then go through the rotors going forwards, then the plugboard again.
+
+    This leads to two quirks. First, Enigma is self-decrypting. If "E" became "A" on a given setting, then "A" would have become "E"
+
+    More importantly, since the reflector cannot leave a letter unchanged, no letter can ever become itself. This
+    weakness was one that Alan Turing exploited when he developed a machine that could break any Enigma in about 20 minutes
+    """
+    def scrambleChar(self, char):
+        char = self.pb.runWire(char)
+        char = self.runRotorsF(char)
+        char = self.reflect(char)
+        char = self.runRotorsB(char)
+        char = self.pb.runWire(char)
+        return char
+
+    def runRotorsF(self, char): #run rotors forwards
+        for i in range (2, -1, -1):
+            char = self.rotors[i].run(char, "F")
+        
+        return char
+
+    def runRotorsB(self, char):     #run rotors backwards
+        for i in range(3):
+            char = self.rotors[i].run(char, "B")
+    
+        return char
+
+    #basically a plugboard, except all the letters are preset (cannot be manually altered), and every letter has a partner
+    def reflect(self, char):
+        reflection = "YRUHQSLDPXNGOKMIEBFZCWVJAT"       #no letter is mapped to itself, so a letter never becomes itself in Enigma
+        return reflection[charToInt(char) - 1]
 
     def __str__(self):
         rs = self.rotors[0].__str__()
@@ -248,14 +298,9 @@ class RotorFive(Rotor):
 
 
 #public static void main
-e = Enigma("ABCDEFGHIJKLMNOPQRST", '123', [12,5,22])
-print(e.rotors)
-e.shiftRotors()
-print(e.rotors)
-e.shiftRotors()
-print(e.rotors)
-e.shiftRotors()
-print(e.rotors)
+e = Enigma("ZYXWVUTSRQPONMLKJIHG", '123', [12,4,20])
+print(e)
+print(e.scramble(msg))
 
 """
 All the letters:
@@ -287,5 +332,4 @@ Rotor Five: Z to A
 Input:      A   B   C   D   E   F   G   H   I   J   K   L   M   N   O   P   Q   R   S   T   U   V   W   X   Y   Z
 Forward:    V   Z   B   R   G   I   T   Y   U   P   S   D   N   H   L   X   A   W   M   J   Q   O   F   E   C   K
 Back:       Q   C   Y   L   X   W   E   N   F   T   Z   O   S   M   V   J   U   D   K   G   I   A   R   P   H   B
-
 """
