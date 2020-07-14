@@ -37,6 +37,14 @@ class Enigma:
             else:
                 raise ValueError(rSelection + " is not a valid Rotor")
 
+    def __str__(self):
+        rs = self.rotors[0].__str__()
+
+        for i in range(1,3):
+            rs += ", " + self.rotors[i].__str__()
+
+        return "Enigma: " + self.pb.__str__() + "; " + "[" + rs + "]"
+
 
 
 """
@@ -76,6 +84,13 @@ class Plugboard:
     def runWire(self, char):                        #changes the characeter by running it throught the "Wire"
         return self.pbWires[charToInt(char) - 1]
 
+
+    def __str__(self):
+        set = "@ "
+        for i in range(20):
+            set += self.pbWires[i]
+        return "PB " + set
+
 """
 A rotor works by taking a letter and outputting a different one. 
 For example, if Rotor One in position 0 were to recieve an "A" goign forward, it would output an "E".
@@ -91,11 +106,12 @@ Orientation refers to how far along it's spun. "1" means input "A" matches with 
 """
             
 class Rotor:
-    def __init__(self, orientation):
+    def __init__(self, orientation, type):
         self.orientation = orientation - 1      # -1 because an orietation of "1" means A goes into A, so no change
         self.turnkey = 0
         self.forwardWires = []
         self.backwardWires = []
+        self.type = type
     
     def shift(self):
         if (self.orientation is 26):
@@ -118,50 +134,55 @@ class Rotor:
         asNum = asNum - self.orientation                #go back the orientation
         asNum = (asNum + 26 ) % 26                      #fix any negative numbers
         return intToChar(asNum)
+    
+    def __str__(self):
+        return "Rotor Type " + str(self.type) + " @ " + intToChar(self.orientation + 1)
+
+    def __repr__(self):
+        return "Rotor Type " + str(self.type) + " @ " + intToChar(self.orientation + 1)
+
         
         
 
 class RotorOne(Rotor):
     def __init__(self, orientation):
-        super().__init__(orientation)
+        super().__init__(orientation, 1)
         self.turnkey = 18 #turns as it goes from Q to R
         self.forwardWires = "EKMFLGDQVZNTOWYHXUSPAIBRCJ"
         self.backwardWires = "UWYGADFPVZBECKMTHXSLRINQOJ"
 
 class RotorTwo(Rotor):
     def __init__(self, orientation):
-        super().__init__(orientation)
+        super().__init__(orientation, 2)
         self.turnkey = 6 #turns after going from E to F
         self.forwardWires = "AJDKSIRUXBLHWTMCQGZNPYFVOE"
         self.backwardWires = "AJPCZWRLFBDKOTYUQGENHXMIVS"
 
 class RotorThree(Rotor):
     def __init__(self, orientation):
-        super().__init__(orientation)
+        super().__init__(orientation, 3)
         self.turnkey = 23   #turns after going from V to W
         self.forwardWires = "BDFHJLCPRTXVZNYEIWGAKMUSQO"
         self.backwardWires = "TAGBPCSDQEUFVNZHYIXJWLRKOM"
 
 class RotorFour(Rotor):
     def __init__(self, orientation):
-        super().__init__(orientation)
+        super().__init__(orientation, 4)
         self.turnkey = 11 #turns after going from J to K
         self.forwardWires = "ESOVPZJAYQUIRHXLNFTGKDCMWB"
         self.backwardWires = "HZWVARTNLGUPXQCEJMBSKDYOIF"
 
 class RotorFive(Rotor):
     def __init__(self, orientation):
-        super().__init__(orientation)
+        super().__init__(orientation, 5)
         self.turnkey = 1    #turns after going from Z to A
         self.forwardWires = "VZBRGITYUPSDNHLXAWMJQOFECK"
         self.backwardWires = "QCYLXWENFTZOSMVJUDKGIARPHB"     
 
 
 #public static void main
-order = [1, 1, 1]
-e = Enigma("ABCDEFGHIJKLMNOPQRST", "123", order)
+e = Enigma("ABCDEFGHIJKLMNOPQRST", '123', [12,13,2])
 print(e)
-
 
 """
 All the letters:
