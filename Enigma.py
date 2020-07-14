@@ -19,11 +19,14 @@ class Enigma:
     #Rotor order is a 3 digit number in string form saying which rotor should go where.
     #Rotor settings is an array of integers saying the orientations of the rotors
     def __init__(self, pbSettings, rotorOrder, rotorSettings):
-        self.pb = Plugboard(pbSettings)
+        self.pb = Plugboard(pbSettings.upper())
 
         for i in range(3):
             rSelection = rotorOrder[i]
             rOrient = rotorSettings[i]
+            if(rOrient < 1 or rOrient > 26):
+                raise ValueError("Not A Valid Rotor Orientation")
+
             if(rSelection == '1'):
                 self.rotors[i] = RotorOne(rOrient)
             elif(rSelection == '2'):
@@ -36,6 +39,20 @@ class Enigma:
                 self.rotors[i] = RotorFive(rOrient)
             else:
                 raise ValueError(rSelection + " is not a valid Rotor")
+    
+    def scramble(self, message):
+        scrambled = self.cleanString(message.upper())
+        
+        return scrambled
+    
+    def cleanString(self, message):
+        cleaned = ""
+
+        for x in message:
+            if(charToInt(x) <= 26 and charToInt(x) >= 1):
+                cleaned += x
+    
+        return cleaned
 
     def __str__(self):
         rs = self.rotors[0].__str__()
@@ -181,8 +198,8 @@ class RotorFive(Rotor):
 
 
 #public static void main
-e = Enigma("ABCDEFGHIJKLMNOPQRST", '123', [12,13,2])
-print(e)
+e = Enigma("ABCDEFGHIJKLMNOPQRST", '123', [12,3,21])
+print(e.scramble("The Funny Thing"))
 
 """
 All the letters:
