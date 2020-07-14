@@ -131,28 +131,28 @@ class RotorOne(Rotor):
 class RotorTwo(Rotor):
     def __init__(self, orientation):
         super().__init__(orientation)
-        self.turnkey = 18 #turns as it goes from Q to R
+        self.turnkey = 6 #turns after going from E to F
         self.forwardWires = "AJDKSIRUXBLHWTMCQGZNPYFVOE"
         self.backwardWires = "AJPCZWRLFBDKOTYUQGENHXMIVS"
 
 class RotorThree(Rotor):
     def __init__(self, orientation):
         super().__init__(orientation)
-        self.turnkey = 18 #turns as it goes from Q to R
+        self.turnkey = 23   #turns after going from V to W
         self.forwardWires = "BDFHJLCPRTXVZNYEIWGAKMUSQO"
         self.backwardWires = "TAGBPCSDQEUFVNZHYIXJWLRKOM"
 
 class RotorFour(Rotor):
     def __init__(self, orientation):
         super().__init__(orientation)
-        self.turnkey = 18 #turns as it goes from Q to R
+        self.turnkey = 11 #turns after going from J to K
         self.forwardWires = "ESOVPZJAYQUIRHXLNFTGKDCMWB"
         self.backwardWires = "HZWVARTNLGUPXQCEJMBSKDYOIF"
 
 class RotorFive(Rotor):
     def __init__(self, orientation):
         super().__init__(orientation)
-        self.turnkey = 18 #turns as it goes from Q to R
+        self.turnkey = 1    #turns after going from Z to A
         self.forwardWires = "VZBRGITYUPSDNHLXAWMJQOFECK"
         self.backwardWires = "QCYLXWENFTZOSMVJUDKGIARPHB"     
 
@@ -173,5 +173,25 @@ Rotor One:
 Input:      A   B   C   D   E   F   G   H   I   J   K   L   M   N   O   P   Q   R   S   T   U   V   W   X   Y   Z
 Forward:    E   K   M   F   L   G   D   Q   V   Z   N   T   O   W   Y   H   X   U   S   P   A   I   B   R   C   J
 Back:       U   W   Y   G   A   D   F   P   V   Z   B   E   C   K   M   T   H   X   S   L   R   I   N   Q   O   J
+
+Rotor Two:
+Input:      A   B   C   D   E   F   G   H   I   J   K   L   M   N   O   P   Q   R   S   T   U   V   W   X   Y   Z
+Forward:    A   J   D   K   S   I   R   U   X   B   L   H   W   T   M   C   Q   G   Z   N   P   Y   F   V   O   E
+Back:       A   J   P   C   Z   W   R   L   F   B   D   K   O   T   Y   U   Q   G   E   N   H   X   M   I   V   S
+
+Rotor Three:
+Input:      A   B   C   D   E   F   G   H   I   J   K   L   M   N   O   P   Q   R   S   T   U   V   W   X   Y   Z
+Forward:    B   D   F   H   J   L   C   P   R   T   X   V   Z   N   Y   E   I   W   G   A   K   M   U   S   Q   O
+Back:       T   A   G   B   P   C   S   D   Q   E   U   F   V   N   Z   H   Y   I   X   J   W   L   R   K   O   M
+
+Rotor Four:
+Input:      A   B   C   D   E   F   G   H   I   J   K   L   M   N   O   P   Q   R   S   T   U   V   W   X   Y   Z
+Forward:    E   S   O   V   P   Z   J   A   Y   Q   U   I   R   H   X   L   N   F   T   G   K   D   C   M   W   B
+Back:       H   Z   W   V   A   R   T   N   L   G   U   P   X   Q   C   E   J   M   B   S   K   D   Y   O   I   F
+
+Rotor Five:
+Input:      A   B   C   D   E   F   G   H   I   J   K   L   M   N   O   P   Q   R   S   T   U   V   W   X   Y   Z
+Forward:    V   Z   B   R   G   I   T   Y   U   P   S   D   N   H   L   X   A   W   M   J   Q   O   F   E   C   K
+Back:       Q   C   Y   L   X   W   E   N   F   T   Z   O   S   M   V   J   U   D   K   G   I   A   R   P   H   B
 
 """
