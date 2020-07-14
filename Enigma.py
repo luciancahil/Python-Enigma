@@ -8,6 +8,37 @@ def intToChar(int):
 def charToInt(char):        #Only meant for capital letters
     return ord(char) - 64
 
+
+"""
+TODO: Explain Engima
+"""
+
+class Enigma:
+    rotors = [None,None,None]
+    #pbSettings are a string where 0 and 1 are switched, 2 and 3 are switched, and so forth
+    #Rotor order is a 3 digit number in string form saying which rotor should go where.
+    #Rotor settings is an array of integers saying the orientations of the rotors
+    def __init__(self, pbSettings, rotorOrder, rotorSettings):
+        self.pb = Plugboard(pbSettings)
+
+        for i in range(3):
+            rSelection = rotorOrder[i]
+            rOrient = rotorSettings[i]
+            if(rSelection == '1'):
+                self.rotors[i] = RotorOne(rOrient)
+            elif(rSelection == '2'):
+                self.rotors[i] = RotorTwo(rOrient)
+            elif(rSelection == '3'):
+                self.rotors[i] = RotorThree(rOrient)
+            elif(rSelection == '4'):
+                self.rotors[i] = RotorFour(rOrient)
+            elif(rSelection == '5'):
+                self.rotors[i] = RotorFive(rOrient)
+            else:
+                raise ValueError(rSelection + " is not a valid Rotor")
+
+
+
 """
 The plugboard is the first and last thing that a letter goes through.
 In the PlugBoard, 10 letters are connected to annother letter A to B, B to A, so on
@@ -44,7 +75,6 @@ class Plugboard:
     
     def runWire(self, char):                        #changes the characeter by running it throught the "Wire"
         return self.pbWires[charToInt(char) - 1]
-
 
 """
 A rotor works by taking a letter and outputting a different one. 
@@ -128,27 +158,10 @@ class RotorFive(Rotor):
 
 
 #public static void main
-r1 = RotorOne(1)
-for i in range (1, 27):
-    print(r1.run(intToChar(i),"F"))
+order = [1, 1, 1]
+e = Enigma("ABCDEFGHIJKLMNOPQRST", "123", order)
+print(e)
 
-print("")
-
-for i in range (1, 27):
-    print(r1.run(intToChar(i),"B"))
-
-print()
-rotorOne = RotorOne(10)
-
-print(rotorOne.run("D", "F"))
-print()
-print(rotorOne.run("D", "B"))
-
-print("")
-try:
-    rotorOne.run("D", "N")
-except ValueError:
-    print("Invalid Direction Caught")
 
 """
 All the letters:
