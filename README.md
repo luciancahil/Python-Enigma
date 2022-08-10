@@ -13,7 +13,7 @@ For a basic run, simply edit the message at the top, and run the program using y
 
 There are 4 parts of an Enigma machine. The plugboard, rotors, and reflector. We will work by seeing the journey the letter "H" takes as it goes through the Engima, with Plugboard settings "ZYXWVUTSRQPONMLKJIHG", using rotors 1, 2, and 3 in that order, in the settings 12, 4, 20.  
 
-## Plugboard.
+### Plugboard.
 
 A Plugboard is the first and last thing we run into. It works by making 10 pairs of letters. In our example, the letter Pairs are ZY, XW, VU, TS,  RQ,  PO,  NM, LK,  JI, HG. If a plugboard accepts a letter in a pair, it turns it into its partner. 
 
@@ -21,7 +21,7 @@ Since we started with "H", our letter immediately becomes a "G", as in our setti
 
 If a letter is not part of a pair, it goes to the Rotors unchanged.
 
-## Rotors Forward. 
+### Rotors Forward. 
 
 Rotors accept a letter, and then output a new letter. They also have an attribute called "Orientation".
 
@@ -37,13 +37,13 @@ Finally, the Rotor's orientation also affects output, but in reverse. A setting 
 
 The other 2 rotors follow a similar pattern. Rotor 2's orientation turns the "H' into a "K", then into an "L", then finally back into "I", and the third rotor (Rotor 1 with orientation 11), turns the "I" into a "T", then into a "P", and finally into an "E". 
 
-## Reflector. 
+### Reflector. 
 
-The Reflector behaves very similarly to the plugboard, except for 2 key differences. One, all letters are paired, and two, the parings cannot be altered.
+The Reflector behaves very similarly to the plugboard, except for 2 key differences. One, all letters are paired, and two, the parings cannot be altered. The parings are included below the rotor parings.
 
 As it is, "E" is paired with "Q" on the reflector, so the reflector in this case outputs a "Q".
 
-## Running backwards.
+### Running backwards.
 
 After the reflector, we go through the rotors and plugboard backwards.
 
@@ -71,3 +71,34 @@ The first parameter is the plugboard settings. Simply type a 20 long string cont
 To choose the rotors, send in a 3 digit number as a string in the second Parameter. Make sure each digit is between 1 and 5 inclusive, and that there are no repeats.
 
 The choose the settigns of the rotors, provdie the third parameter in the form of a 3 element Array of integers. The integers must be between 0 and 25 inclusive.
+
+## Rotors and Reflector
+
+Rotor One:
+Input:      A   B   C   D   E   F   G   H   I   J   K   L   M   N   O   P   Q   R   S   T   U   V   W   X   Y   Z
+Forward:    E   K   M   F   L   G   D   Q   V   Z   N   T   O   W   Y   H   X   U   S   P   A   I   B   R   C   J
+Back:       U   W   Y   G   A   D   F   P   V   Z   B   E   C   K   M   T   H   X   S   L   R   I   N   Q   O   J
+
+Rotor Two:
+Input:      A   B   C   D   E   F   G   H   I   J   K   L   M   N   O   P   Q   R   S   T   U   V   W   X   Y   Z
+Forward:    A   J   D   K   S   I   R   U   X   B   L   H   W   T   M   C   Q   G   Z   N   P   Y   F   V   O   E
+Back:       A   J   P   C   Z   W   R   L   F   B   D   K   O   T   Y   U   Q   G   E   N   H   X   M   I   V   S
+
+Rotor Three:
+Input:      A   B   C   D   E   F   G   H   I   J   K   L   M   N   O   P   Q   R   S   T   U   V   W   X   Y   Z
+Forward:    B   D   F   H   J   L   C   P   R   T   X   V   Z   N   Y   E   I   W   G   A   K   M   U   S   Q   O
+Back:       T   A   G   B   P   C   S   D   Q   E   U   F   V   N   Z   H   Y   I   X   J   W   L   R   K   O   M
+
+Rotor Four:
+Input:      A   B   C   D   E   F   G   H   I   J   K   L   M   N   O   P   Q   R   S   T   U   V   W   X   Y   Z
+Forward:    E   S   O   V   P   Z   J   A   Y   Q   U   I   R   H   X   L   N   F   T   G   K   D   C   M   W   B
+Back:       H   Z   W   V   A   R   T   N   L   G   U   P   X   Q   C   E   J   M   B   S   K   D   Y   O   I   F
+
+Rotor Five:
+Input:      A   B   C   D   E   F   G   H   I   J   K   L   M   N   O   P   Q   R   S   T   U   V   W   X   Y   Z
+Forward:    V   Z   B   R   G   I   T   Y   U   P   S   D   N   H   L   X   A   W   M   J   Q   O   F   E   C   K
+Back:       Q   C   Y   L   X   W   E   N   F   T   Z   O   S   M   V   J   U   D   K   G   I   A   R   P   H   B
+
+Reflector:
+Input:      A   B   C   D   E   F   G   H   I   J   K   L   M   N   O   P   Q   R   S   T   U   V   W   X   Y   Z
+Output:     Y   R   U   H   Q   S   L   D   P   X   N   G   O   K   M   I   E   B   F   Z   C   W   V   J   A   T
