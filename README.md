@@ -11,7 +11,7 @@ For a basic run, simply edit the message at the top, and run the program using y
 
 ## How An Enigma Works
 
-There are 4 parts of an Enigma machine. The plugboard, rotors, and reflector. We will work by seeing the journey the letter "H" takes as it goes through the Engima, with Plugboard settings "ZYXWVUTSRQPONMLKJIHG", using rotors 1, 2, and 3 in that order, in the settings 12, 4, 20.  
+There are three parts of an Enigma machine. The plugboard, rotors, and reflector. We will work by seeing the journey the letter "H" takes as it goes through the Engima, with Plugboard settings "ZYXWVUTSRQPONMLKJIHG", using rotors 1, 2, and 3 in that order, in the settings 12, 4, 20.  
 
 ### Plugboard.
 
@@ -23,7 +23,7 @@ If a letter is not part of a pair, it goes to the Rotors unchanged.
 
 ### Rotors Forward. 
 
-Rotors accept a letter, and then output a new letter. They also have an attribute called "Orientation".
+Rotors accept a letter, and then output a new letter. They also have an attribute called "Orientation". An enigma machine has 3 rotors, each with their own orientation.
 
 Before they process the letter, they go through a shift. That way, the same letter in the input won't necessarily become the same letter in the output. 
 
