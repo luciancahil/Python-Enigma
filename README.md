@@ -3,8 +3,7 @@
 ## About
 A working Enigma Machine built using Python. This program will perfectly mimic the behavior of an Enigma machine, and can be used to encode any any alphabetical message. If one has knows the original settings, they can also be used to decode an Enigma message.
 
-## 
-ow To Use
+## How To Use
 
 ### Simple Run
 For a basic run, simply edit the message at the top, and run the program using your IDE of choice. This will then encode your desired message in Enigma.
